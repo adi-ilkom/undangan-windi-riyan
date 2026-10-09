@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Windi & Riyan</title>
+    <!-- Library Ikon Musik & Amplop -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Desain & Warna Web */
         body { 
@@ -13,9 +15,44 @@
             color: #4a4a4a; 
             margin: 0; 
             padding: 0; 
+            overflow-x: hidden;
         }
+
+        /* Sampul Depan / Cover Pembuka */
+        #cover {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fdfbf7;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+        }
+        #cover.open {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .cover-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #c4a484;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            margin: 15px 0;
+        }
+
+        /* Bagian Atas Utama (Hero) */
         .hero { 
-            background-color: #c4a484; /* Warna cokelat elegan */
+            background-color: #c4a484; 
             padding: 60px 20px 70px 20px; 
             color: white; 
             border-bottom-left-radius: 50px;
@@ -30,12 +67,13 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
             margin: 15px auto;
         }
-        .hero h1 { 
+        .hero h1, #cover h1 { 
             font-family: 'Georgia', serif; 
             font-size: 2.8em; 
             margin: 10px 0; 
             font-style: italic;
         }
+        #cover h1 { color: #8c7355; font-size: 2.4em; }
         .hero p { font-size: 1.1em; margin-top: 5px; letter-spacing: 2px; }
         
         .section { padding: 40px 20px; }
@@ -97,14 +135,64 @@
             font-size: 0.9em;
             letter-spacing: 1px;
             font-weight: bold;
+            border: none;
+            cursor: pointer;
             transition: background 0.3s;
         }
         .btn:hover { background-color: #705b42; }
+
+        /* Tombol Musik Melayang di Pojok Layar */
+        #music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 48px;
+            height: 48px;
+            background-color: #8c7355;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            z-index: 999;
+            border: 2px solid white;
+        }
+        .spin {
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Bagian Paling Atas (Hero dengan Foto) -->
+    <!-- Sampul Depan / Cover Pembuka Undangan -->
+    <div id="cover">
+        <p style="letter-spacing: 2px; color: #8c7355; font-size: 0.9em;">UNDANGAN PERNIKAHAN</p>
+        <img src="photo_2026-10-09_14-07-08.jpg" alt="Foto Windi & Riyan" class="cover-img">
+        <h1>Windi & Riyan</h1>
+        <p style="color: #666; font-size: 0.9em;">Minggu, 15 November 2026</p>
+        <button class="btn" onclick="bukaUndangan()"><i class="fa-solid fa-envelope-open" style="margin-right: 8px;"></i> Buka Undangan</button>
+    </div>
+
+    <!-- Tombol Kontrol Musik Melayang -->
+    <div id="music-btn" onclick="toggleMusic()" style="display: none;">
+        <i id="music-icon" class="fa-solid fa-music spin"></i>
+    </div>
+
+    <!-- Pemutar Musik -->
+    <audio id="myAudio" loop>
+        <!-- Memanggil file lagu.mp3 jika diunggah di GitHub -->
+        <source src="lagu.mp3" type="audio/mpeg">
+        <!-- Musik instrumen romantis cadangan dari internet -->
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-music-116035.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Bagian Hero -->
     <div class="hero">
         <p>THE WEDDING OF</p>
         <img src="photo_2026-10-09_14-07-08.jpg" alt="Foto Windi & Riyan" class="profile-img">
@@ -166,5 +254,37 @@
         </div>
     </div>
 
+    <!-- Script Pengatur Musik & Sampul -->
+    <script>
+        var audio = document.getElementById("myAudio");
+        var musicBtn = document.getElementById("music-btn");
+        var musicIcon = document.getElementById("music-icon");
+        var isPlaying = false;
+
+        function bukaUndangan() {
+            // Sembunyikan sampul depan
+            document.getElementById("cover").classList.add("open");
+            
+            // Tampilkan tombol musik & putar audio
+            musicBtn.style.display = "flex";
+            audio.play().then(function() {
+                isPlaying = true;
+            }).catch(function(error) {
+                console.log("Autoplay tercegah:", error);
+            });
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.classList.remove("spin");
+                isPlaying = false;
+            } else {
+                audio.play();
+                musicIcon.classList.add("spin");
+                isPlaying = true;
+            }
+        }
+    </script>
 </body>
 </html>
