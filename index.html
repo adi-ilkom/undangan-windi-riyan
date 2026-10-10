@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Windi & Riyan</title>
-    <!-- Font Google & Icon FontAwesome -->
+    <!-- Font & Ikon -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Animation CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     
     <style>
         :root {
@@ -29,7 +27,7 @@
             overflow-x: hidden;
         }
 
-        /* Sampul Depan */
+        /* Sampul Depan (Cover) */
         #cover {
             position: fixed;
             top: 0; left: 0;
@@ -42,7 +40,7 @@
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
-            transition: all 0.8s ease-in-out;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
         }
         #cover.open {
             transform: translateY(-100%);
@@ -87,7 +85,7 @@
 
         .section { padding: 45px 20px; }
         
-        /* Countdown Timer */
+        /* Hitung Mundur */
         .timer-container {
             display: flex;
             justify-content: center;
@@ -108,11 +106,7 @@
             font-weight: 600;
             color: var(--primary);
         }
-        .time-box p {
-            margin: 0;
-            font-size: 0.75em;
-            color: #777;
-        }
+        .time-box p { margin: 0; font-size: 0.75em; color: #777; }
 
         /* Kutipan */
         .quote-box {
@@ -128,7 +122,7 @@
             line-height: 1.8;
         }
 
-        /* Card Box */
+        /* Kotak Detail */
         .details-box { 
             background-color: white; 
             margin: 20px auto; 
@@ -139,7 +133,7 @@
             border: 1px solid #f0e6d8;
         }
 
-        /* Video Container */
+        /* Kotak Video */
         .video-container {
             max-width: 400px;
             margin: 0 auto;
@@ -147,9 +141,14 @@
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             border: 4px solid #ffffff;
+            background-color: #000;
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
         }
 
-        /* Form Ucapan / RSVP */
+        /* Form Ucapan */
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; font-size: 0.85em; margin-bottom: 5px; color: #555; }
         .form-control {
@@ -174,7 +173,7 @@
             font-size: 0.85em;
         }
 
-        /* Button Styling */
+        /* Tombol */
         .btn { 
             display: inline-block; 
             padding: 12px 28px; 
@@ -192,7 +191,7 @@
         }
         .btn:hover { background-color: #705b42; transform: translateY(-2px); }
 
-        /* Floating Music Button */
+        /* Tombol Musik Float */
         #music-btn {
             position: fixed;
             bottom: 25px; right: 25px;
@@ -224,18 +223,18 @@
         <button class="btn" onclick="bukaUndangan()"><i class="fa-solid fa-envelope-open" style="margin-right: 8px;"></i> Buka Undangan</button>
     </div>
 
-    <!-- Tombol Musik Floating -->
+    <!-- Tombol Musik -->
     <div id="music-btn" onclick="toggleMusic()" style="display: none;">
         <i id="music-icon" class="fa-solid fa-music spin"></i>
     </div>
 
-    <!-- Audio Player -->
+    <!-- Pemutar Audio Latar -->
     <audio id="myAudio" loop>
         <source src="lagu.mp3" type="audio/mpeg">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-music-116035.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Section Hero -->
+    <!-- Bagian Hero -->
     <div class="hero">
         <p style="letter-spacing: 2px; font-size: 0.8em; margin: 0;">THE WEDDING OF</p>
         <img src="photo_2026-10-09_14-07-08.jpg" alt="Foto Windi & Riyan" class="profile-img">
@@ -243,14 +242,14 @@
         <p style="letter-spacing: 2px; font-size: 0.9em; margin-top: 5px;">15 . 11 . 2026</p>
     </div>
 
-    <!-- Section Countdown & Ayat -->
+    <!-- Waktu Mundur & Ayat -->
     <div class="section" style="padding-bottom: 10px;">
-        <div class="quote-box" data-aos="fade-up">
+        <div class="quote-box">
             "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya..."
             <span style="font-weight: bold; font-style: normal; color: var(--primary); margin-top: 8px; display: block;">&mdash; QS. Ar-Rum: 21 &mdash;</span>
         </div>
 
-        <div data-aos="fade-up" style="margin-top: 30px;">
+        <div style="margin-top: 30px;">
             <p style="font-size: 0.85em; color: #777;">Menghitung Hari Menuju Hari Bahagia:</p>
             <div class="timer-container" id="countdown">
                 <div class="time-box"><span id="days">0</span><p>Hari</p></div>
@@ -262,8 +261,8 @@
         </div>
     </div>
 
-    <!-- Section Mempelai -->
-    <div class="section" data-aos="fade-up">
+    <!-- Mempelai -->
+    <div class="section">
         <p style="font-size: 0.85em; color: #777; font-style: italic;">Assalamu'alaikum Warahmatullahi Wabarakatuh<br>Maha suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan, dengan memohon rahmat-Nya kami mengundang Anda pada pernikahan putra-putri kami:</p>
         
         <div style="font-size: 1.8em; font-family: 'Great Vibes', cursive; color: var(--primary); margin-top: 20px;">Windi Widyawati (Windi)</div>
@@ -275,8 +274,8 @@
         <p style="font-size: 0.85em; color: #666; margin-top: 0;">Putra Ketiga (Bungsu) dari Bapak Umin & Ibu Anah Maemunah (Almh)<br><small>(Palasari)</small></p>
     </div>
 
-    <!-- Section Video Momen Kebersamaan -->
-    <div class="section" style="background-color: #f9f5eb;" data-aos="fade-up">
+    <!-- Video Momen -->
+    <div class="section" style="background-color: #f9f5eb;">
         <h3 style="color: var(--primary); font-family: 'Great Vibes', cursive; font-size: 2.5em; margin-bottom: 20px;">Momen Kebersamaan</h3>
         <div class="video-container">
             <video id="myVideo" loop muted playsinline poster="photo_2026-10-09_14-07-08.jpg">
@@ -285,8 +284,8 @@
         </div>
     </div>
 
-    <!-- Section Waktu & Lokasi -->
-    <div class="section" data-aos="fade-up">
+    <!-- Waktu & Lokasi -->
+    <div class="section">
         <h3 style="color: var(--primary); font-family: 'Great Vibes', cursive; font-size: 2.5em; margin-bottom: 10px;">Waktu & Lokasi</h3>
         
         <div class="details-box">
@@ -308,12 +307,11 @@
         </div>
     </div>
 
-    <!-- Section Amplop Digital / Hadiah -->
-    <div class="section" style="background-color: #f9f5eb;" data-aos="fade-up">
+    <!-- Amplop Digital -->
+    <div class="section" style="background-color: #f9f5eb;">
         <h3 style="color: var(--primary); font-family: 'Great Vibes', cursive; font-size: 2.5em; margin-bottom: 10px;">Amplop Digital</h3>
         <p style="font-size: 0.85em; color: #666; max-width: 400px; margin: 0 auto 20px auto;">Doa restu Anda merupakan hadiah terindah. Namun jika ingin memberi hadiah cashless, Anda dapat mentransfer ke rekening berikut:</p>
         
         <div class="details-box">
             <i class="fa-solid fa-credit-card" style="font-size: 2em; color: var(--primary); margin-bottom: 10px;"></i>
-            <p style="margin: 0; font-weight: bold;">BANK BCA</p>
-            <p style="margin: 5px 0; font-size: 1.1em; letter-spacing: 1px; color: var(--primary);" id="rekening">1234567890
+            <p style="margin: 0; font-weight: bold
