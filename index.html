@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ========================================== -->
+    <!-- META TAGS UNTUK PREVIEW WHATSAPP & MEDSOS -->
+    <!-- ========================================== -->
     <title>Undangan Pernikahan Windi & Riyan</title>
+    <meta property="og:title" content="Undangan Pernikahan Windi & Riyan">
+    <meta property="og:description" content="Minggu, 15 November 2026. Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.">
+    <meta property="og:image" content="https://adi-ilkom.github.io/undangan-windi-riyan/photo_2026-10-09_14-07-08.jpg">
+    <meta property="og:url" content="https://adi-ilkom.github.io/undangan-windi-riyan/">
+    <meta property="og:type" content="website">
+    <!-- ========================================== -->
+
     <!-- Font & Ikon -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -465,7 +476,7 @@
             // 2. Format Pesan untuk WhatsApp
             const teksWA = `Halo Windi & Riyan!%0A%0ASaya *${nama}*.%0A%0AKonfirmasi Kehadiran: *${status}*%0A%0A*Pesan & Doa:*%0A${pesan}`;
             
-            // 3. Membuka jendela WhatsApp (ke nomor Windi atau Riyan sesuai pilihan tamu)
+            // 3. Membuka jendela WhatsApp
             window.open(`https://wa.me/${nomorWA}?text=${teksWA}`, "_blank");
 
             // Kosongkan form setelah dikirim
