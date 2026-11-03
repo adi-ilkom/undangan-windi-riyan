@@ -10,7 +10,8 @@
     <title>Undangan Pernikahan Windi & Riyan</title>
     <meta property="og:title" content="Undangan Pernikahan Windi & Riyan">
     <meta property="og:description" content="Minggu, 15 November 2026. Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.">
-    <meta property="og:image" content="https://adi-ilkom.github.io/undangan-windi-riyan/photo_2026-10-09_14-07-08.jpg">
+    <!-- Memanggil foto-utama.jpg untuk thumbnail WA -->
+    <meta property="og:image" content="https://adi-ilkom.github.io/undangan-windi-riyan/foto-utama.jpg">
     <meta property="og:url" content="https://adi-ilkom.github.io/undangan-windi-riyan/">
     <meta property="og:type" content="website">
     <!-- ========================================== -->
@@ -67,7 +68,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: linear-gradient(rgba(253,251,247,0.95), rgba(253,251,247,0.95)), url('photo_2026-10-09_14-07-08.jpg') center/cover;
+            background: linear-gradient(rgba(253,251,247,0.95), rgba(253,251,247,0.95)), url('foto-sampul.jpg') center/cover;
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -187,10 +188,10 @@
     <!-- Wadah Efek Bunga Jatuh -->
     <div id="falling-petals"></div>
 
-    <!-- Cover Depan -->
+    <!-- Cover Depan (Memanggil foto-sampul.jpg) -->
     <div id="cover">
         <p style="letter-spacing: 3px; color: var(--primary); font-size: 0.8em; font-weight: 600;">WEDDING INVITATION</p>
-        <img src="photo_2026-10-09_14-07-08.jpg" alt="Foto Windi & Riyan" class="cover-img">
+        <img src="foto-sampul.jpg" alt="Foto Sampul Windi & Riyan" class="cover-img">
         <div class="title-cursive">Windi & Riyan</div>
         <p style="color: #666; font-size: 0.85em; margin-bottom: 20px;">Minggu, 15 November 2026</p>
         <button class="btn" id="btn-buka"><i class="fa-solid fa-envelope-open" style="margin-right: 8px;"></i> Buka Undangan</button>
@@ -207,10 +208,10 @@
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-music-116035.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Bagian Hero -->
+    <!-- Bagian Hero (Memanggil foto-utama.jpg) -->
     <div class="hero">
         <p style="letter-spacing: 2px; font-size: 0.8em; margin: 0;">THE WEDDING OF</p>
-        <img src="photo_2026-10-09_14-07-08.jpg" alt="Foto Windi & Riyan" class="profile-img">
+        <img src="foto-utama.jpg" alt="Foto Utama Windi & Riyan" class="profile-img">
         <div class="title-cursive">Windi & Riyan</div>
         <p style="letter-spacing: 2px; font-size: 0.9em; margin-top: 5px;">15 . 11 . 2026</p>
     </div>
@@ -251,7 +252,8 @@
     <div class="section" style="background-color: #f9f5eb;">
         <h3 style="color: var(--primary); font-family: 'Great Vibes', cursive; font-size: 2.5em; margin-bottom: 20px;">Momen Kebersamaan</h3>
         <div class="video-container">
-            <video id="myVideo" loop muted playsinline poster="photo_2026-10-09_14-07-08.jpg">
+            <!-- Thumbnail video juga memanggil foto-utama.jpg -->
+            <video id="myVideo" loop muted playsinline poster="foto-utama.jpg">
                 <source src="video-momen.mp4" type="video/mp4">
             </video>
         </div>
@@ -316,7 +318,6 @@
                     <input type="text" id="namaTamu" class="form-control" placeholder="Masukkan nama Anda" required>
                 </div>
                 
-                <!-- Opsi Pilihan Kirim WA -->
                 <div class="form-group">
                     <label>Kirim Ucapan Kepada:</label>
                     <select id="penerimaWA" class="form-control" required>
@@ -377,9 +378,7 @@
             
             wadahBunga.appendChild(kelopak);
             
-            setTimeout(() => {
-                kelopak.remove();
-            }, durasi * 1000);
+            setTimeout(() => { kelopak.remove(); }, durasi * 1000);
         }
 
         setInterval(buatKelopakBunga, 400);
@@ -401,12 +400,10 @@
                     if(audio) {
                         var playPromise = audio.play();
                         if (playPromise !== undefined) {
-                            playPromise.then(function() {
-                                window.isPlaying = true;
-                            }).catch(function(error) { console.log("Musik dicegah browser."); });
+                            playPromise.then(function() { window.isPlaying = true; })
+                            .catch(function(error) { console.log("Musik dicegah browser."); });
                         }
                     }
-
                     if(video) {
                         var vidPromise = video.play();
                         if (vidPromise !== undefined) {
@@ -462,24 +459,16 @@
             const nama = document.getElementById("namaTamu").value;
             const status = document.getElementById("konfirmasi").value;
             const pesan = document.getElementById("pesanTamu").value;
-            
-            // Ambil nomor WA dari pilihan dropdown
             const nomorWA = document.getElementById("penerimaWA").value;
 
-            // 1. Memunculkan ucapan di web (sebagai simulasi visual bagi tamu)
             const daftar = document.getElementById("daftarUcapan");
             const itemBaru = document.createElement("div");
             itemBaru.className = "ucapan-item";
             itemBaru.innerHTML = `<strong>${nama}</strong> <span style="font-size: 0.75em; color: green;">&bull; ${status}</span><p style="margin: 5px 0 0 0; color: #555;">${pesan}</p>`;
             daftar.prepend(itemBaru);
             
-            // 2. Format Pesan untuk WhatsApp
             const teksWA = `Halo Windi & Riyan!%0A%0ASaya *${nama}*.%0A%0AKonfirmasi Kehadiran: *${status}*%0A%0A*Pesan & Doa:*%0A${pesan}`;
-            
-            // 3. Membuka jendela WhatsApp
             window.open(`https://wa.me/${nomorWA}?text=${teksWA}`, "_blank");
-
-            // Kosongkan form setelah dikirim
             document.getElementById("rsvpForm").reset();
         }
     </script>
